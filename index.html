@@ -103,16 +103,67 @@
             height: 12px;
         }
 
-        /* Fade in on scroll */
+        /* Scroll Animations */
+        .scroll-fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .scroll-fade-in.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Fade in on scroll (legacy) */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Staggered card animations */
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .stagger-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Profile Photo */
+        .profile-photo {
+            width: 240px;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #0f766e;
+            box-shadow: 0 10px 30px rgba(15, 118, 110, 0.2),
+                0 0 0 1px rgba(15, 118, 110, 0.1);
+        }
+
+        .profile-photo-wrapper {
+            position: relative;
+        }
+
+        .profile-photo-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            background: linear-gradient(135deg, rgba(15, 118, 110, 0.1), rgba(13, 148, 136, 0.05));
+            border-radius: 50%;
+            z-index: -1;
         }
 
         /* Highlight numbers */
@@ -228,57 +279,65 @@
 
     <!-- About Section -->
     <section id="about" class="py-20 bg-white">
-        <div class="max-w-4xl mx-auto px-6">
+        <div class="max-w-5xl mx-auto px-6">
             <div class="fade-in">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">소개</h2>
                     <div class="w-20 h-1 bg-gradient-to-r from-teal-600 to-teal-400 mx-auto rounded-full"></div>
                 </div>
 
-                <div
-                    class="bg-gradient-to-br from-cream-50 to-white rounded-2xl p-8 md:p-12 border border-cream-200 shadow-sm">
-                    <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                        사회교육과 심리학을 복수전공하며 <span class="font-semibold text-teal-700">4.22 학점</span>으로
-                        <span class="font-semibold text-teal-700">3년 만에 조기졸업</span>한 열정적인 교육자입니다.
-                    </p>
+                <div class="grid md:grid-cols-[280px_1fr] gap-8 md:gap-12 items-start">
+                    <!-- Profile Photo -->
+                    <div class="profile-photo-wrapper mx-auto md:mx-0">
+                        <img src="profile.jpg" alt="윤승현 프로필 사진" class="profile-photo">
+                    </div>
 
-                    <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                        학생 동기부여 중심의 프로젝트 기반 수업을 통해 학생들이 스스로 배움의 주체가 되도록 돕고 있으며,
-                        지역사회와 연계한 교육과정 개발로 교실 안팎의 경계를 넘는 의미 있는 배움을 실현하고 있습니다.
-                    </p>
+                    <!-- About Content -->
+                    <div
+                        class="bg-gradient-to-br from-cream-50 to-white rounded-2xl p-8 md:p-10 border border-cream-200 shadow-sm">
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                            사회교육과 심리학을 복수전공하며 <span class="font-semibold text-teal-700">4.22 학점</span>으로
+                            <span class="font-semibold text-teal-700">3년 만에 조기졸업</span>한 열정적인 교육자입니다.
+                        </p>
 
-                    <p class="text-lg text-gray-700 leading-relaxed">
-                        교사 학습공동체 리더로서 동료 교사들과 함께 성장하며,
-                        학생들의 집중력과 문제해결력 향상이라는 구체적인 성과를 만들어왔습니다.
-                    </p>
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                            학생 동기부여 중심의 프로젝트 기반 수업을 통해 학생들이 스스로 배움의 주체가 되도록 돕고 있으며,
+                            지역사회와 연계한 교육과정 개발로 교실 안팎의 경계를 넘는 의미 있는 배움을 실현하고 있습니다.
+                        </p>
 
-                    <div class="grid md:grid-cols-2 gap-6 mt-8">
-                        <div class="flex items-start space-x-3">
-                            <div class="text-2xl">🎓</div>
-                            <div>
-                                <div class="font-semibold text-gray-900">학생 중심 교육</div>
-                                <div class="text-sm text-gray-600">프로젝트 기반 수업 운영</div>
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                            교사 학습공동체 리더로서 동료 교사들과 함께 성장하며,
+                            학생들의 집중력과 문제해결력 향상이라는 구체적인 성과를 만들어왔습니다.
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-start space-x-2">
+                                <div class="text-xl">🎓</div>
+                                <div>
+                                    <div class="font-semibold text-gray-900 text-sm">학생 중심 교육</div>
+                                    <div class="text-xs text-gray-600">프로젝트 기반 수업</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <div class="text-2xl">🤝</div>
-                            <div>
-                                <div class="font-semibold text-gray-900">지역사회 연계</div>
-                                <div class="text-sm text-gray-600">교육과정 개발 및 실행</div>
+                            <div class="flex items-start space-x-2">
+                                <div class="text-xl">🤝</div>
+                                <div>
+                                    <div class="font-semibold text-gray-900 text-sm">지역사회 연계</div>
+                                    <div class="text-xs text-gray-600">교육과정 개발</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <div class="text-2xl">👥</div>
-                            <div>
-                                <div class="font-semibold text-gray-900">교사 학습공동체</div>
-                                <div class="text-sm text-gray-600">리더십 및 협업</div>
+                            <div class="flex items-start space-x-2">
+                                <div class="text-xl">👥</div>
+                                <div>
+                                    <div class="font-semibold text-gray-900 text-sm">학습공동체</div>
+                                    <div class="text-xs text-gray-600">리더십 및 협업</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <div class="text-2xl">📊</div>
-                            <div>
-                                <div class="font-semibold text-gray-900">성과 중심</div>
-                                <div class="text-sm text-gray-600">학생 역량 향상 입증</div>
+                            <div class="flex items-start space-x-2">
+                                <div class="text-xl">📊</div>
+                                <div>
+                                    <div class="font-semibold text-gray-900 text-sm">성과 중심</div>
+                                    <div class="text-xs text-gray-600">역량 향상 입증</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -776,7 +835,7 @@
 
         const observerOptions = {
             root: null,
-            rootMargin: '0px',
+            rootMargin: '0px 0px -50px 0px',
             threshold: 0.1
         };
 
@@ -791,6 +850,56 @@
         fadeElements.forEach(element => {
             observer.observe(element);
         });
+
+        // Staggered animations for cards
+        const staggerObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const cards = entry.target.querySelectorAll('.card-hover');
+                    cards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, index * 100); // 100ms stagger delay
+                    });
+                    staggerObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        // Observe sections with multiple cards for staggered effect
+        document.querySelectorAll('#awards .space-y-4, #activities .space-y-6, #activities .grid').forEach(section => {
+            // Set initial state for cards
+            section.querySelectorAll('.card-hover').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+            });
+            staggerObserver.observe(section);
+        });
+
+        // Education card animation
+        const educationCard = document.querySelector('#experience .card-hover');
+        if (educationCard) {
+            educationCard.style.opacity = '0';
+            educationCard.style.transform = 'translateY(30px)';
+            educationCard.style.transition = 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+
+            const singleCardObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        singleCardObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            singleCardObserver.observe(educationCard);
+        }
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
